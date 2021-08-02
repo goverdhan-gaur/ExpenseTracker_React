@@ -1,0 +1,23 @@
+.expenseDate {
+  background: rgb(0, 0, 0);
+  padding: 10px 20px;
+  box-shadow: 0 0 10px 0px rgba(173, 173, 173, 0.226);
+  border-radius: 10px;
+  text-align: center;
+  color: white;
+  width:150px;
+  border: 3px solid rgba(114, 113, 113, 0.609);
+}
+
+.expenseDate__month {
+  font-size: 1rem;
+  font-weight: bold;
+}
+.expenseDate__date {
+  font-size: 3rem;
+  font-weight: bold;
+}
+.expenseDate__year {
+  font-size: 1.3rem;
+  
+}
