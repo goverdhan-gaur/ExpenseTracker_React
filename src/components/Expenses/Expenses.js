@@ -1,43 +1,33 @@
-import React, {useState} from 'react';
-import ExpenseItem from './ExpenseItem'
+import React, { useState } from 'react'
+import ExpensesList from './ExpensesList'
 import Card from '../UI/Card'
 import './Expenses.css'
 import ExpensesFilter from './ExpensesFilter'
+import ExpensesChart from './ExpensesChart'
 function Expenses(props) {
-
-  const [filteredYear, setfilteredYear] = useState('2020');
+  const [expensesArr, setExpensesArr] = useState(props.expenses)
+  const [filteredYear, setfilteredYear] = useState('All')
 
   const filterChangehandler = (filteredYear) => {
-    setfilteredYear(filteredYear);
+    setfilteredYear(filteredYear)
+    if (filteredYear === 'all') {
+      setExpensesArr(props.expenses)
+    } else {
+      const expensesFiltered = props.expenses.filter(
+        (expense) => expense.date.getFullYear().toString() === filteredYear,
+      )
+      setExpensesArr(expensesFiltered)
+    }
   }
+
   return (
     <Card className="expenses">
-      <ExpensesFilter selected= {filteredYear} onDropdownChange = {filterChangehandler}/>
-      <ExpenseItem
-        date={props.expenses[0].date}
-        title={props.expenses[0].title}
-        amount={props.expenses[0].amount}
-      ></ExpenseItem>
-      <ExpenseItem
-        date={props.expenses[1].date}
-        title={props.expenses[1].title}
-        amount={props.expenses[1].amount}
-      ></ExpenseItem>
-      <ExpenseItem
-        date={props.expenses[2].date}
-        title={props.expenses[2].title}
-        amount={props.expenses[2].amount}
-      ></ExpenseItem>
-      <ExpenseItem
-        date={props.expenses[3].date}
-        title={props.expenses[3].title}
-        amount={props.expenses[3].amount}
-      ></ExpenseItem>
-      {/* <ExpenseItem
-        date={props.expenses[4].date}
-        title={props.expenses[4].title}
-        amount={props.expenses[4].amount}
-      ></ExpenseItem> */}
+      <ExpensesFilter
+        selected={filteredYear}
+        onDropdownChange={filterChangehandler}
+      />
+      <ExpensesChart expenses={expensesArr} />
+      <ExpensesList items={expensesArr} />
     </Card>
   )
 }
